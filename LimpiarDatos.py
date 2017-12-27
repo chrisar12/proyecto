@@ -5,14 +5,11 @@ import numpy as np
 def leerarchivo():
     data = pd.read_excel('Libro1.xlsx')
     # creamos dataframe del excel
-    return pd.DataFrame(data)
-
-
-def eliminardup(df):
+    df = pd.DataFrame(data)
     return df.drop_duplicates(subset='num_paciente', keep='first')
 
 
-def eliminardatos1(df_elimina):
+def eliminardatos(df_elimina):
     df_elimina[df_elimina['raza'] != '?']
     df_elimina[df_elimina['dadoalta_tipo'] != 11]
     df_elimina[df_elimina['dadoalta_tipo'] != 13]
@@ -37,7 +34,8 @@ def reemplazar(df_elimina):
     return df_elimina
 
 
-def categorias1(df_elimina):
+def categorias(x):
+    df_elimina = x
     df_elimina.loc[df_elimina['edad'] == "[0-10)", 'edad'] = 0
     df_elimina.loc[df_elimina['edad'] == "[10-20)", 'edad'] = 10
     df_elimina.loc[df_elimina['edad'] == "[20-30)", 'edad'] = 20
@@ -65,10 +63,7 @@ def categorias1(df_elimina):
     df_elimina.loc[df_elimina['diabetesMed'] == "No", 'diabetesMed'] = 0
     df_elimina.loc[df_elimina['diabetesMed'] == "Yes", 'diabetesMed'] = 1
     df_elimina['diabetesMed'] = df_elimina['diabetesMed'].astype(np.int8)
-    return df_elimina
 
-
-def categorias6(df_elimina):
     medicamentos = ["metformin", "repaglinide", "nateglinide", "chlorpropamide", "glimepiride", "glipizide",
                     "glyburide", "pioglitazone", "rosiglitazone", "acarbose", "miglitol",
                     "insulin", "glyburide-metformin"]
@@ -78,33 +73,37 @@ def categorias6(df_elimina):
         df_elimina.loc[df_elimina[med] == "Steady", med] = 0
         df_elimina.loc[df_elimina[med] == "Up", med] = 10
         df_elimina[med] = df_elimina[med].astype(np.int32)
-    return df_elimina
 
-
-def categorias7(df_elimina):
     categoria = ['raza', 'genero', 'num_paciente', 'especialidad_medica', 'diag_1', 'diag_2', 'diag_3']
 
     for c in categoria:
         df_elimina[c] = pd.Categorical(df_elimina[c]).codes
-    return df_elimina
 
-
-def categorias8(df_elimina):
-    df_elimina.loc[df_elimina['readmision'] != 'NO', 'readmision'] = 0
-    df_elimina.loc[df_elimina['readmision'] == 'NO', 'readmision'] = 1
+    df_elimina.loc[df_elimina['readmision'] == 'NO', 'readmision'] = 0
+    df_elimina.loc[df_elimina['readmision'] == '>30', 'readmision'] = 1
+    df_elimina.loc[df_elimina['readmision'] == '<30', 'readmision'] = 2
     df_elimina['readmision'] = df_elimina['readmision'].astype(np.int8)
     return df_elimina
 
 
-def eliminacolumna(df):
-    df.drop(labels=['admision_id', 'id', 'peso',
+def eliminacolumna(x):
+    df = x
+    df.drop(labels=['admision_id', 'id', 'peso', 'num_paciente',
                     'codigo_vendedor', 'num_proce', 'number_outpatient',
                     'number_emerg', 'number_inpatient', 'num_diag', 'acetohexamide',
                     'tolbutamide', 'tolazamide', 'examide', 'troglitazone',
                     'citoglipton', 'metformin-rosiglitazone', 'metformin-pioglitazone',
                     'glipizide-metformin', 'glimepiride-pioglitazone'],
             axis=1, inplace=True)
+    return df
 
 
 def guardar(df_elimina):
     df_elimina.reset_index().to_csv('dataset_final.csv', header=True, index=False)
+
+
+def ejecutar_limpieza():
+    xx = eliminardatos(leerarchivo())
+    cat = categorias(reemplazar(xx))
+    elimcol = eliminacolumna(cat)
+    guardar(elimcol)
