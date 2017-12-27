@@ -22,9 +22,13 @@ arregloy = df[df.columns[-3]].as_matrix()
 X_train, X_test, y_train, y_test = train_test_split(arreglox, arregloy)
 
 entrena = navidad.fit(X_train, y_train)  # reglog.fit(X_train, y_train)
+entrena2 = reglog.fit(X_train, y_train)  # reglog.fit(X_train, y_train)
 
 print(entrena)
-print(entrena.score(X_test, y_test))
+print(str(entrena.score(X_test, y_test)) + ' scort arbol ')
+
+print(entrena2)
+print(str(entrena2.score(X_test, y_test)) + ' scort regresion lineal ')
 
 export_graphviz(navidad, out_file='arbol.dot',
                 impurity=False, filled=True)
