@@ -88,8 +88,9 @@ def categorias(x):
 
 def eliminacolumna(x):
     df = x
-    df.drop(labels=['admision_id', 'id', 'peso', 'num_paciente',
-                    'codigo_vendedor', 'num_proce', 'number_outpatient',
+    df.drop(labels=['admision_id', 'id', 'peso', 'num_paciente', 'A1resultado', 'repaglinide', 'nateglinide',
+                    'chlorpropamide', 'glimepiride', 'glipizide', 'glyburide', 'pioglitazone', 'rosiglitazone',
+                    'miglitol', 'codigo_vendedor', 'num_proce', 'number_outpatient',
                     'number_emerg', 'number_inpatient', 'num_diag', 'acetohexamide',
                     'tolbutamide', 'tolazamide', 'examide', 'troglitazone',
                     'citoglipton', 'metformin-rosiglitazone', 'metformin-pioglitazone',

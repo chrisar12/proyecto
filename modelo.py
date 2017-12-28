@@ -30,5 +30,5 @@ print(str(entrena.score(X_test, y_test)) + ' scort arbol ')
 print(entrena2)
 print(str(entrena2.score(X_test, y_test)) + ' scort regresion lineal ')
 
-export_graphviz(navidad, out_file='arbol.dot',
+export_graphviz(navidad, out_file='arbol1.dot',
                 impurity=False, filled=True)
