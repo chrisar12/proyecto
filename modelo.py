@@ -11,8 +11,8 @@ df = read_csv(archivo)
 
 # print(df)
 
-arreglox = df[df.columns[2:-3]].as_matrix()
-arregloy = df[df.columns[-3]].as_matrix()
+arreglox = df[df.columns[1:-1]].as_matrix()
+arregloy = df[df.columns[-1]].as_matrix()
 
 # print(arregloy)
 
