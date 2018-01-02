@@ -108,3 +108,8 @@ def ejecutar_limpieza():
     cat = categorias(reemplazar(xx))
     elimcol = eliminacolumna(cat)
     guardar(elimcol)
+
+def limpieza_reporte():
+    xx = eliminardatos(leerarchivo())
+    cat = eliminacolumna(reemplazar(xx))
+    cat.reset_index().to_csv('dataset_final_reporte.csv', header=True, index=False)
