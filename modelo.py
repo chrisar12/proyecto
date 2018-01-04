@@ -2,6 +2,7 @@ from pandas import read_csv
 from sklearn import linear_model
 from sklearn.model_selection import train_test_split
 from sklearn.tree import tree, export_graphviz
+from obprueba import Diabetes as odi
 
 reglog = linear_model.LogisticRegression()
 navidad = tree.DecisionTreeClassifier()
@@ -32,3 +33,5 @@ print(str(entrena2.score(X_test, y_test)) + ' scort regresion lineal ')
 
 export_graphviz(navidad, out_file='arbol1.dot',
                 impurity=False, filled=True)
+
+obj = odi()

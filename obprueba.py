@@ -1,4 +1,4 @@
-from numpy import reshape
+from numpy import array
 
 
 def Diabetes(raza=3
@@ -17,6 +17,8 @@ def Diabetes(raza=3
              , cambiomed=0
              , diabetesMed=0
              ):
-    return reshape([raza, genero, edad, tipo_admision, dadoalta_tipo, origen_admision, tiempo_hospital,
-            especialidad_medica, num_proce_lab, num_medicaciones, diag1, diag2, diag3, cambiomed,
-            diabetesMed])
+    x = array([raza, genero, edad, tipo_admision, dadoalta_tipo, origen_admision, tiempo_hospital,
+               especialidad_medica, num_proce_lab, num_medicaciones, diag1, diag2, diag3, cambiomed,
+               diabetesMed])
+    return x.reshape(1,-1)
+
