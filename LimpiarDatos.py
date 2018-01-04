@@ -90,9 +90,9 @@ def eliminacolumna(x):
     df = x
     df.drop(labels=['admision_id', 'id', 'peso', 'num_paciente', 'A1resultado', 'repaglinide', 'nateglinide',
                     'chlorpropamide', 'glimepiride', 'glipizide', 'glyburide', 'pioglitazone', 'rosiglitazone',
-                    'miglitol', 'codigo_vendedor', 'num_proce', 'number_outpatient',
-                    'number_emerg', 'number_inpatient', 'num_diag', 'acetohexamide',
-                    'tolbutamide', 'tolazamide', 'examide', 'troglitazone',
+                    'miglitol', 'codigo_vendedor', 'num_proce', 'number_outpatient', 'number_emerg',
+                    'number_inpatient', 'num_diag', 'acetohexamide', 'tolbutamide', 'tolazamide', 'examide',
+                    'troglitazone', 'max_glu_serum', 'metformin', 'acarbose', 'insulin', 'glyburide-metformin',
                     'citoglipton', 'metformin-rosiglitazone', 'metformin-pioglitazone',
                     'glipizide-metformin', 'glimepiride-pioglitazone'],
             axis=1, inplace=True)
@@ -108,6 +108,7 @@ def ejecutar_limpieza():
     cat = categorias(reemplazar(xx))
     elimcol = eliminacolumna(cat)
     guardar(elimcol)
+
 
 def limpieza_reporte():
     xx = eliminardatos(leerarchivo())

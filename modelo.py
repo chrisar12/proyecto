@@ -1,5 +1,5 @@
 from pandas import read_csv
-from sklearn import linear_model, model_selection
+from sklearn import linear_model
 from sklearn.model_selection import train_test_split
 from sklearn.tree import tree, export_graphviz
 
